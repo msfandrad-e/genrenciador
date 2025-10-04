@@ -18,11 +18,6 @@ try:
     # Primeiro carrega sem usecols para ver a estrutura atual
     df_temp = pd.read_excel("estoque_mercearia.xlsx", header=0)
     
-    # Debug: mostra o que encontrou
-    st.write("🔍 Estrutura atual do arquivo:")
-    st.write(f"Colunas: {df_temp.columns.tolist()}")
-    st.write(f"Número de colunas: {len(df_temp.columns)}")
-    
     # Tenta encontrar as colunas que precisamos pelos nomes
     colunas_encontradas = []
     nomes_procurados = ['Produto', 'Preco', 'Medida', 'Estoque']
@@ -61,7 +56,6 @@ try:
         df['Estoque'] = pd.to_numeric(df['Estoque'], errors='coerce')
     
     st.success("✅ Arquivo carregado com sucesso!")
-    st.write(f"📊 Colunas sendo usadas: {df.columns.tolist()}")
     
 except FileNotFoundError:
     st.error("Arquivo 'estoque_mercearia.xlsx' não encontrado.")
@@ -223,3 +217,4 @@ if len(df_com_estoque) > 0:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.warning("Não há dados de estoque suficientes para gerar o gráfico.")
+
